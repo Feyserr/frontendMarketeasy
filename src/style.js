@@ -2,7 +2,15 @@ import styled from "styled-components";
 
 
 export const StyleForm = styled.form`
+    display: flex;
+    align-items: center;
+    flex-flow: column;
 
+    .buttons{
+        button{
+            margin-right:10px;
+        }
+    }
 `;
 
 export const InputText = styled.input`
@@ -11,6 +19,7 @@ export const InputText = styled.input`
     height: 25px;
     align-items: center;
     border-radius: 10px;
+    margin:12px 0;
 
 `;
 

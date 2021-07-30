@@ -2,11 +2,14 @@ import React,{useEffect, useState} from "react";
 import axios from "axios";
 import {Button} from "../../components/Button/index";
 import { useHistory } from "react-router";
-import { FlexWrapper } from "./style";
-
+import { FlexWrapper, ButtonContainer, ProductContainer, AbsoluteContainer, Container } from "./style";
+import NewProduct from "../newProduct/newProduct";
+import {BsTrashFill} from "react-icons/bs"
+import {GoPencil} from "react-icons/go"
+import {MdAddBox} from "react-icons/md"
+import { Title } from "../../style";
 
 function Home(){
-    
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -34,6 +37,10 @@ function Home(){
         history.push((`/products/${id}`));
     }
 
+    function addProduct(){
+        history.push(("/new/products"));
+    }
+
     useEffect(()=>{
         getProducts();
     },[]);
@@ -53,10 +60,13 @@ function Home(){
         )}
 
     return (
-        <div>
+        <Container>
+            <Title>Lista de Produtos</Title>
             {products.map((val,index)=>{
+                console.log(val);
                 return(
-                    <div key={index}>
+                    
+                    <ProductContainer key={index}>
                         <FlexWrapper>
                             <div className="separacao">
                                 <p className="styleCampo">Nome</p>
@@ -65,25 +75,28 @@ function Home(){
 
                             <div className="separacao">
                                 <p className="styleCampo">Preço</p>
-                                <p>{val.preço}</p>
+                                <p>{val.price}</p>
                             </div>
 
                             <div className="separacao">
                                 <p className="styleCampo">Categoria</p>
-                                <p>{val.categoria}</p>
+                                <p>{val.category}</p>
                             </div>
                         </FlexWrapper>
 
-                        <div className="ButtonStyle">
-                            <Button label={"Editar"} onClick={()=> editProducts(val.id)}/>
-                            <Button label={"Deletar"} onClick={()=> deleteProducts(val.id)}/>
-                        </div>
-                    </div>
+                        <ButtonContainer>
+                            <BsTrashFill onClick={()=> deleteProducts(val.id)}/>
+                            <GoPencil onClick={()=> editProducts(val.id)}/>
+                        </ButtonContainer>
+                    </ProductContainer>
                 )
             })}
-
-        </div>
+                    <AbsoluteContainer onClick={()=> addProduct()}>
+                        <p>Adicionar Produto</p>
+                        <MdAddBox />
+                    </AbsoluteContainer>
+        </Container>
     )
 
 }
-export default Home();
+export default Home;

@@ -2,7 +2,9 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import { StyleForm, InputText, Title } from "../../style";
 import {Button} from '../../components/Button/index';
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
+import { Container } from "../Home/style";
+
 
 function EditProducts(){
     const [name, setName] = useState("");
@@ -10,6 +12,7 @@ function EditProducts(){
     const [category, setCategory] = useState("");
     const [loading, setLoading] = useState(true);
     const {id} = useParams();
+    const history = useHistory();
     
     const handleSubmit = (event)=>{
         event.preventDefault();
@@ -39,7 +42,7 @@ function EditProducts(){
 
             setLoading(false);
         })
-        .catch((error)=>{
+            .catch((error)=>{
             console.log(error);
             setLoading(false);
         })
@@ -50,7 +53,7 @@ function EditProducts(){
     },[]);
 
     return (
-        <div>
+        <Container>
             <Title>Edição de Produtos</Title>
             <StyleForm onSubmit={handleSubmit}>
                 
@@ -65,11 +68,13 @@ function EditProducts(){
                 <InputText value={category} type="text" placeholder="Digite a categoria do produto" name="category" onChange={(e)=>{
                     setCategory(e.target.value);
                 }}/>
-
-                <Button label={"Editar"} type="submit"/>
-
+                <div className={"buttons"}>
+                    <Button label={"Editar"} type="submit"/>
+                    <Button label={"Voltar"} onClick={()=> history.push("/")}/>
+                </div>
             </StyleForm>
-        </div>
+            
+        </Container>
     )
 
 
