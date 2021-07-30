@@ -1,0 +1,3 @@
+Para utilizar basta clonar o repositório, ter o React instalado e dar o yarn start no CMD dentro da pasta do frontend. O projeto foi feito com ReactJS
+estilizado com o Styled-Components, usando React-router para fazer as rotas e foi utilizado um banco de dados postgresql hospedado no heroku pra ter uma 
+facilidade maior em testar o projeto. Espero que goste :)
